@@ -171,21 +171,45 @@ Este projeto implementa um sistema CRUD (Create, Read, Update, Delete) para gere
 
     ```javascript
     // index.js
-    const { AlunoController } = require("./src/controllers/ControllerAluno");
-    const { Curso } = require("./src/models/Curso");
+        const { AlunoController } = require("./src/controllers/ControllerAluno");
+        const { Curso } = require("./src/models/Curso");
+        
+        // Instância de cursos
+        const excelDaNasa = new Curso("Excel da NASA", "Curso preparatório para dev da NASA");
+        const engenhariaEspacial = new Curso("Engenharia Espacial", "Curso avançado para engenheiros de sistemas espaciais");
+        
+        // Instância do controlador de alunos
+        const alunoController = new AlunoController();
+        
+        // 1. Listar alunos (inicialmente vazio)
+        console.log("Listando alunos inicialmente (esperado vazio):");
+        alunoController.listarAluno();
+        
+        // 2. Criar (Adicionar) alunos
+        console.log("\nAdicionando alunos:");
+        alunoController.adicionarAluno("João", "joao@email.com", "84999999999", "a1234", excelDaNasa);
+        alunoController.adicionarAluno("Maria", "maria@email.com", "84988888888", "a5678", engenhariaEspacial);
+        
+        // Listar após adicionar alunos
+        console.log("\nListando alunos após adição:");
+        alunoController.listarAluno();
+        
+        // 3. Atualizar (Editar) um aluno
+        console.log("\nEditando aluno com matrícula 'a1234':");
+        alunoController.editarAluno("a1234", "João Silva", null, "84977777777", engenhariaEspacial);
+        
+        // Listar após edição
+        console.log("\nListando alunos após edição:");
+        alunoController.listarAluno();
+        
+        // 4. Excluir um aluno
+        console.log("\nExcluindo aluno com matrícula 'a5678':");
+        alunoController.excluirAluno("a5678");
+        
+        // Listar após exclusão
+        console.log("\nListando alunos após exclusão:");
+        alunoController.listarAluno();
 
-    // Instância do curso
-    const excelDaNasa = new Curso("Excel da NASA", "Curso preparatório para dev da NASA");
-
-    // Instância do controlador de alunos
-    const alunoController = new AlunoController();
-
-    // Listar alunos (inicialmente vazio)
-    alunoController.listarAluno();
-
-    // Adicionar um aluno e listar novamente
-    alunoController.adicionarAluno("João", "joao@email.com", "84999999999", "a1234", excelDaNasa);
-    alunoController.listarAluno();
     ```
 
 ## Explicação Final
