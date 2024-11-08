@@ -33,21 +33,21 @@ Este projeto implementa um sistema CRUD (Create, Read, Update, Delete) para gere
             }
         }
 
-        editarAluno(matricula, novoNome, novoEmail, novoTelefone, novoCurso) {
-            try {
-                const aluno = alunos.find(aluno => aluno.getMatricula === matricula);
-                if (aluno) {
-                    aluno.nome = novoNome || aluno.nome;
-                    aluno.email = novoEmail || aluno.email;
-                    aluno.telefone = novoTelefone || aluno.telefone;
-                    aluno.setCurso = novoCurso || aluno.getCurso;
-                } else {
-                    console.log("Aluno não encontrado!");
-                }
-            } catch (error) {
-                console.error("Erro ao editar aluno:", error.message);
+        editarAluno(matricula, novoNome, novoEmail, novoTelefone) {
+        try {
+            const aluno = alunos.find(aluno => aluno.getMatricula === matricula);
+            if (aluno) {
+                aluno.nome = novoNome || aluno.nome;
+                aluno.email = novoEmail || aluno.email;
+                aluno.telefone = novoTelefone || aluno.telefone;
+            } else {
+                console.log("Aluno não encontrado!");
             }
+        } catch (error) {
+            console.error("Erro ao editar aluno:", error.message);
         }
+    }
+
 
         excluirAluno(matricula) {
             try {
