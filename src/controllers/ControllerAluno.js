@@ -1,6 +1,7 @@
-// src/controllers/ControllerAluno.js
+// Importações
 const { alunos } = require("../config/database");
 const { Aluno } = require("../models/Aluno");
+const { Curso } = require("../models/Curso"); // <== Adicione esta linha
 
 class AlunoController {
     adicionarAluno(nome, email, telefone, matricula, curso) {
@@ -13,14 +14,13 @@ class AlunoController {
         }
     }
 
-    editarAluno(matricula, novoNome, novoEmail, novoTelefone, novoCurso) {
+    editarAluno(matricula, novoNome, novoEmail, novoTelefone) {
         try {
             const aluno = alunos.find(aluno => aluno.getMatricula === matricula);
             if (aluno) {
                 aluno.nome = novoNome || aluno.nome;
                 aluno.email = novoEmail || aluno.email;
                 aluno.telefone = novoTelefone || aluno.telefone;
-                aluno.setCurso = novoCurso || aluno.getCurso;
             } else {
                 console.log("Aluno não encontrado!");
             }
@@ -50,7 +50,7 @@ class AlunoController {
                 email: aluno.email,
                 telefone: aluno.telefone,
                 matricula: aluno.getMatricula,
-                curso: aluno.getCurso.exibirCurso()
+                curso: `${aluno.getCurso.nome} - ${aluno.getCurso.descricao}`
             }));
             console.table(dadosAlunos);
         } catch (error) {
