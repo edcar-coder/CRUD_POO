@@ -1,10 +1,10 @@
 // Importações
-const { alunos } = require("../config/database");
+const { pool } = require("../config/database");
 const { Aluno } = require("../models/Aluno");
 const { Curso } = require("../models/Curso"); // <== Adicione esta linha
 
 class AlunoController {
-    adicionarAluno(nome, email, telefone, matricula, curso) {
+    adicionarAluno(id, nome, email, telefone, matricula, curso) {
         try {
             const novoAluno = new Aluno(nome, email, telefone, matricula, curso);
             alunos.push(novoAluno);
@@ -43,18 +43,13 @@ class AlunoController {
         }
     }
 
-    listarAluno() {
+    async listarAluno() {
         try {
-            const dadosAlunos = alunos.map(aluno => ({
-                nome: aluno.nome,
-                email: aluno.email,
-                telefone: aluno.telefone,
-                matricula: aluno.getMatricula,
-                curso: `${aluno.getCurso.nome} - ${aluno.getCurso.descricao}`
-            }));
-            console.table(dadosAlunos);
+            const consulta = `select aluno.nome, aluno.email, aluno.telefone, aluno.matricula, aluno.curso from aluno`
+            const dados = await pool.query(consulta);
+            console.table(dados.rows);
         } catch (error) {
-            console.error("Erro ao listar alunos:", error.message);
+           
         }
     }
 }

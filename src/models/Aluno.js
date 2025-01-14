@@ -5,8 +5,9 @@ class Aluno extends Pessoa {
     #matricula;
     #curso;
 
-    constructor(nome, email, telefone, matricula, curso) {
+    constructor(id, nome, email, telefone, matricula, curso) {
         super(nome, email, telefone);
+        this.id = id;
         this.#matricula = matricula;
         this.#curso = curso;
     }
